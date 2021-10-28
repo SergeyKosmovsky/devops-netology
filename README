@@ -1,1 +1,22 @@
-First Line
+# исключить файлы и папки в папке .terraform/
+**/.terraform/*
+
+# исключить файлы с расширением .tfstate и исключить файлы с названием .tfstate
+*.tfstate
+*.tfstate.*
+
+# исключить файл crash.log
+crash.log
+
+# исключить все файлы с расширеним .tfvars
+*.tfvars
+
+# исключить файлы override.tf и override.tf.json; файлы оканчивающиеся на _override.tf и _override.tf.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# игнорирование файла .terraformrc и terraform.rc
+.terraformrc
+terraform.rc

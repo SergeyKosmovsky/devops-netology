@@ -46,7 +46,7 @@ result_os = os.popen(' && '.join(bash_command)).read()
 for result in result_os.split('\n'):
     if result.find('modified') != -1:
         prepare_result = result.replace('\tmodified:   ', '')
-        print(prepare_result)
+        print("~/devops-netology"+prepare_result)
 ```
 
 ### Вывод скрипта при запуске при тестировании:
@@ -65,9 +65,9 @@ Changes not staged for commit:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 vagrant@vim:~$ python3 pythscript
-stest1
-stest2
-test1
+~/devops-netology stest1
+~/devops-netology stest2
+~/devops-netology test1
 ```
 
 ## Обязательная задача 3

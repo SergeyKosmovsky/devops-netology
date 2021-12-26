@@ -84,15 +84,15 @@ result_os = os.popen(' && '.join(bash_command)).read()
 for result in result_os.split('\n'):
     if result.find('modified') != -1:
         prepare_result = result.replace('\tmodified:   ', '')
-        print(prepare_result)    
+        print(p+prepare_result)    
 ```
 добавил переменную p для параметра пути
 ### Вывод скрипта при запуске при тестировании:
 ```
 vagrant@vim:~$ python3 pythscript /home/vagrant/devops-netology/
-stest1
-stest2
-test1
+/home/vagrant/devops-netology/stest1
+/home/vagrant/devops-netology/stest2
+/home/vagrant/devops-netology/test1
 ```
 
 ## Обязательная задача 4
@@ -100,11 +100,42 @@ test1
 
 ### Ваш скрипт:
 ```python
-???
+#!/usr/bin/env python3
+
+import socket
+import time
+import datetime
+
+web = {'drive.google.com':'0.0.0.0', 'mail.google.com':'0.0.0.0', 'google.com':'0.0.0.0'}
+
+while 1==1 :
+  time.sleep(5)
+  for host in web:
+    ip = socket.gethostbyname(host)
+    if ip != web[host]:
+      print(str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))+' [ERROR] '+str(host)+' '+web[host]+' IP изменён на '+ip)
+      web[host]=ip
+    else:
+      print(str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))+'         '+str(host)+' '+ip)
 ```
+
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-???
+2021-12-26 08:33:02 [ERROR] drive.google.com 0.0.0.0 IP изменён на 64.233.162.194
+2021-12-26 08:33:02 [ERROR] mail.google.com 0.0.0.0 IP изменён на 142.251.1.17
+2021-12-26 08:33:02 [ERROR] google.com 0.0.0.0 IP изменён на 209.85.233.139
+2021-12-26 08:33:07         drive.google.com 64.233.162.194
+2021-12-26 08:33:07         mail.google.com 142.251.1.17
+2021-12-26 08:33:07 [ERROR] google.com 209.85.233.139 IP изменён на 209.85.233.138
+2021-12-26 08:33:12         drive.google.com 64.233.162.194
+2021-12-26 08:33:12         mail.google.com 142.251.1.17
+2021-12-26 08:33:12         google.com 209.85.233.138
+2021-12-26 08:33:17         drive.google.com 64.233.162.194
+2021-12-26 08:33:17         mail.google.com 142.251.1.17
+2021-12-26 08:33:17         google.com 209.85.233.138
+2021-12-26 08:33:22         drive.google.com 64.233.162.194
+2021-12-26 08:33:22         mail.google.com 142.251.1.17
+2021-12-26 08:33:22         google.com 209.85.233.138
 ```
 

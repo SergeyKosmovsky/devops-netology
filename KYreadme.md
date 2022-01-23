@@ -2,6 +2,7 @@
 
 
 •	Процесс установки и настройки ufw
+
 vagrant@vim:~$ sudo apt install ufw
 Reading package lists... Done
 Building dependency tree

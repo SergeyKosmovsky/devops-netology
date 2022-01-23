@@ -1,7 +1,7 @@
 Результатом курсовой работы должны быть снимки экрана или текст:
 
 
-•	Процесс установки и настройки ufw
+• Процесс установки и настройки ufw
 
 vagrant@vim:~$ sudo apt install ufw
 Reading package lists... Done
@@ -38,9 +38,9 @@ Anywhere on lo             ALLOW IN    Anywhere
 Anywhere (v6) on lo        ALLOW IN    Anywhere (v6)
 
  
-•	Процесс установки и выпуска сертификата с помощью hashicorp vault
+• Процесс установки и выпуска сертификата с помощью hashicorp vault
 
-#Корневой сертификат
+# Корневой сертификат
 root@vim:~# vault secrets enable pki
 Success! Enabled the pki secrets engine at: pki/
 root@vim:~# vault secrets tune -max-lease-ttl=87600h pki
@@ -49,7 +49,7 @@ root@vim:~# vault write -field=certificate pki/root/generate/internal \
 > common_name="example.com" \
 > ttl=87600h > CA_cert.crt
 
-#Промежуточный сертификат
+# Промежуточный сертификат
 root@vim:~# vault secrets enable -path=pki_int pki
 Success! Enabled the pki secrets engine at: pki_int/
 root@vim:~# vault secrets tune -max-lease-ttl=43800h pki_int
@@ -61,7 +61,7 @@ root@vim:~# vault write -format=json pki/root/sign-intermediate csr=@pki_interme
 > format=pem_bundle ttl="43800h" \
 > | jq -r '.data.certificate' > intermediate.cert.pem
 
-#Конечный сертификат с ключом 
+# Конечный сертификат с ключом 
 root@vim:~# vault write pki_int/intermediate/set-signed certificate=@intermediate.cert.pem
 Success! Data written to: pki_int/intermediate/set-signedrm
 root@vim:~# vault write pki_int/roles/example-dot-com \
@@ -92,9 +92,9 @@ drwxr-xr-x 3 root root 4096 Jan 20 18:43 vault
 -rw-r--r-- 1 root root  903 Jan 20 18:52 vault_init.txt
 
  
-•	Процесс установки и настройки сервера nginx
+• Процесс установки и настройки сервера nginx
 
-#Скачиваем, у меня уже скачан
+# Скачиваем, у меня уже скачан
 vagrant@vim:~$ sudo apt install nginx
 Reading package lists... Done
 Building dependency tree
@@ -102,12 +102,12 @@ Reading state information... Done
 nginx is already the newest version (1.18.0-0ubuntu1.2).
 0 upgraded, 0 newly installed, 0 to remove and 109 not upgraded.
 
-#Создаю отдельную папку и кладу туда pem и key
+# Создаю отдельную папку и кладу туда pem и key
 root@vim:~# mkdir /etc/ssl/vault_certificates_for_nginx
 root@vim:~# cp test.example.com.pem /etc/ssl/vault_certificates_for_nginx/
 root@vim:~# cp test.example.com.key /etc/ssl/vault_certificates_for_nginx/
 
-#Вношу данные в файл настройки ngix и рестартую приложение
+# Вношу данные в файл настройки ngix и рестартую приложение
 vagrant@vim:~$ sudo vim /etc/nginx/nginx.conf  
 …
 server {
@@ -122,10 +122,10 @@ server {
 vagrant@vim:~$ sudo /etc/init.d/nginx restart
 Restarting nginx (via systemctl): nginx.service.
 
-•	Страница сервера nginx в браузере хоста не содержит предупреждений
+• Страница сервера nginx в браузере хоста не содержит предупреждений
 вложил файл рядом с ссылкой
 
-•	Скрипт генерации нового сертификата работает (сертификат сервера ngnix должен быть "зеленым")
+• Скрипт генерации нового сертификата работает (сертификат сервера ngnix должен быть "зеленым")
 
 root@vim:~# cat cert-script.sh
 #!/bin/bash
@@ -155,7 +155,7 @@ total 8
 
 По времени видно, что изменилдось всё в течении минуты.
 
-•	Crontab работает (выберите число и время так, чтобы показать что crontab запускается и делает что надо)
+• Crontab работает (выберите число и время так, чтобы показать что crontab запускается и делает что надо)
 
 root@vim:~# crontab -l
 5 15 * * * /root/cert-script.sh

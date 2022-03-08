@@ -4,7 +4,7 @@ C:\Users\Sergey>docker pull mysql:8.0
 C:\Users\Sergey>docker volume create vol_mysql  
 C:\Users\Sergey>docker run --rm --name mysql -e MYSQL_ROOT_PASSWORD=mysql -ti -p 3306:3306 -v vl-mysql:/etc/mysql/ mysql:8.0  
 #Изучите бэкап БД и восстановитесь из него.  
-C:\Users\Sergey>  
+C:\Users\Sergey>mysql -uroot -pmysql < test_dump.sql test_db
 #Найдите команду для выдачи статуса БД и приведите в ответе из ее вывода версию сервера БД.  
 
 mysql> \s

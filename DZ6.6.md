@@ -23,7 +23,19 @@
 Как вы думаете, в чем может быть проблема?  
 
 
-Судя по всему не хватает памяти. Документация говорит, блокировка может вызываться прцоессом сброса буфера записи на диск.
+Судя по документации, блокировка записи может быть вызвана процессом сброса буфера записи на диск:
+
+Latency due to AOF and disk I/O
+
+"Another source of latency is due to the Append Only File support on Redis. The AOF basically uses two system calls to accomplish its work. One is write(2) that is used in order to write data to the append only file, and the other one is fdatasync(2) that is used in order to flush the kernel file buffer on disk in order to ensure the durability level specified by the user."
+
+Возможо блокировка записи может быть вызвана большим количеством удаляемых ключей - операция записи блокируется до завершения процесса удаления ключей:
+
+"if the database has many many keys expiring in the same second, and these make up at least 25% of the current population of keys with an expire set, Redis can block in order to get the percentage of keys already expired below 25%.
+
+This approach is needed in order to avoid using too much memory for keys that are already expired, and usually is absolutely harmless since it's strange that a big number of keys are going to expire in the same exact second, but it is not impossible that the user used EXPIREAT extensively with the same Unix time.
+
+In short: be aware that many keys expiring at the same moment can be a source of latency."
 
 
 # Задача 3
@@ -45,6 +57,8 @@ InterfaceError: (InterfaceError) 2013: Lost connection to MySQL server during qu
 
 # Задача 4
 
+Перед выполнением задания ознакомтесь со статьей Common PostgreSQL errors из блога Percona.
+
 Вы решили перевести гис-систему из задачи 3 на PostgreSQL, так как прочитали в документации, что эта СУБД работает с большим объемом данных лучше, чем MySQL.  
 
 После запуска пользователи начали жаловаться, что СУБД время от времени становится недоступной. В dmesg вы видите, что:  
@@ -59,5 +73,10 @@ postmaster invoked oom-killer
 
 
 
-Из-за недостатков оперативной памяти, ОС предотвращает падение системы путём завершением процессов. Увеличить ОЗУ или настроить лимиты на использование ресурсов должно решить проблему.
+Процесс СУБД был прекращен из-за превышения имеющегося количества памяти процессом ядра OOM-killer. В статье приводится развернутое объяснение проблемы и предложены методы решения, например, модифицировать параметр процесса СУБД oom_score_adj
 
+"If you really want your process not to be killed by OOM-Killer, then there is another kernel parameter oom_score_adj. You can add a big negative value to that to reduce the chance your process gets killed."
+
+Для оптимизации использования памяти Postgres предлагается настроить следующие параметры файла конфигурации postgresql.conf
+
+Для уменьшения размера потребляемой СУБД ОЗУ, в порядке приоритета, нужно уменьшить значения параметра effective_cache_size, затем shared_buffers. Типичные значения параметров work_mem и maintenance_work_mem, по-видимому, пренебрежимо малы по сравнению с типичным размером ОЗУ сервера.

@@ -16,12 +16,12 @@
    
    [Data_source](https://github.com/hashicorp/terraform-provider-aws/blob/main/internal/provider/provider.go#L344) строки 344-735
  
- ![1](https://user-images.githubusercontent.com/93204208/178097923-414dee63-f572-4ac6-bc47-4e4789771f26.jpg)
-
+ 
 
 2. Для создания очереди сообщений SQS используется ресурс aws_sqs_queue, у которого есть параметр name.
     * Этот параметр конфликтует с параметром [name_prefix](https://github.com/hashicorp/terraform-provider-aws/blob/5902887f418edd969cff285acb35464a9c435c11/internal/service/sqs/queue.go#L88)
       
+![1](https://user-images.githubusercontent.com/93204208/178097923-414dee63-f572-4ac6-bc47-4e4789771f26.jpg)
 
       
    * Максимальная длина имени и регулярное выражение не заданы.

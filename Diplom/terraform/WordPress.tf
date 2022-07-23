@@ -20,6 +20,5 @@ resource "yandex_compute_instance" "WordPress" {
 
   metadata = {
     user-data = "${file("meta.txt")}"
-    #ssh-keys  = "sovar:${file("pub")}"
   }
 }

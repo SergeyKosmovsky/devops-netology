@@ -154,7 +154,7 @@ Master_SSL_Verify_Server_Cert: No
 Имеется примечание от разработчика: таска **TASK [install_GitLab : Reconfigure GitLab (first run).]** может зависать, так что следует перезапустить плэйбук, пока не проскочит.  
   
 Заходим на сервер гитлаб по ssh: `ssh -o "ProxyCommand ssh serkos@kosmovskiy.ru nc %h %p" serkos@gitlab.kosmovskiy.ru`  
-И меняем пароль пользователя root с помощью:  `gitlab-rake "gitlab:password:reset[root]"`  
+И меняем пароль пользователя *root* с помощью:  `gitlab-rake "gitlab:password:reset[root]"`  
 
 ```
 [serkos@localhost ansible]$ ssh -o "ProxyCommand ssh serkos@kosmovskiy.ru nc %h %p" serkos@gitlab.kosmovskiy.ru

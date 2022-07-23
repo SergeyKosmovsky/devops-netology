@@ -1,0 +1,51 @@
+global:
+  scrape_interval: 15s
+
+rule_files:
+  - alert.rules.yml
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ["localhost:9093"]
+
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: "prometheus_node"
+    scrape_interval: 5s
+    static_configs:
+     - targets: ["localhost:9100"]
+
+  - job_name: "nginx"
+    scrape_interval: 5s
+    static_configs:
+     - targets: ["{{ domain_name }}:9100"]
+
+  - job_name: "db01"
+    scrape_interval: 5s
+    static_configs:
+     - targets: ["db01.{{ domain_name }}:9100"]
+
+  - job_name: "db02"
+    scrape_interval: 5s
+    static_configs:
+     - targets: ["db02.{{ domain_name }}:9100"]
+
+  - job_name: "app"
+    scrape_interval: 5s
+    static_configs:
+     - targets: ["app.{{ domain_name }}:9100"]
+
+  - job_name: "gitlab"
+    scrape_interval: 5s
+    static_configs:
+     - targets: ["gitlab.{{ domain_name }}:9100"]
+
+  - job_name: "runner"
+    scrape_interval: 5s
+    static_configs:
+     - targets: ["runner.{{ domain_name }}:9100"]

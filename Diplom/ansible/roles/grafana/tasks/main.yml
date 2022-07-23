@@ -1,0 +1,38 @@
+- name: Copy package grafana
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/grafana-enterprise_9.0.4_amd64.deb"
+    dest: /tmp
+
+- name: Install grafana
+  ansible.builtin.apt:
+    deb: /tmp/grafana-enterprise_9.0.4_amd64.deb
+    state: present
+
+#- name: Install grafana
+#  unarchive:
+#    src: "https://dl.grafana.com/enterprise/release/grafana-enterprise-{{ version }}.linux-amd64.tar.gz"
+#    dest: /tmp/
+#    remote_src: yes
+
+
+- name: "Grafana configuration file copy"
+  template:
+    src: grafana.conf.j2
+    dest: /etc/grafana/grafana.ini
+  notify: event_restart_grafana
+
+- name: "Grafana server started"
+  service:
+    name: grafana-server
+    enabled: true
+    state: started
+
+- name: Pause for 15 seconds
+  ansible.builtin.pause:
+    seconds: 15
+
+- name: "Check if Grafana is accessible."
+  uri:
+    url: http://monitoring.{{ domain_name }}:3000
+    method: GET
+    status_code: 200

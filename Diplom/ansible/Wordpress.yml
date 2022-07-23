@@ -1,0 +1,22 @@
+---
+# взято из статьи https://habr.com/ru/post/223073/
+- hosts: app
+  gather_facts: true
+  become: true
+  become_method: sudo
+  become_user: root
+  remote_user: "{{ user_name }}"
+  vars:
+    - download_url: "http://wordpress.org/latest.tar.gz"
+    - wpdirectory: "/var/www"
+
+  roles:
+    - nginx
+    - memcached
+    - php7.4
+    - wordpress
+
+  environment:
+     http_proxy: http://{{ domain_name }}:8118
+     https_proxy: http://{{ domain_name }}:8118
+

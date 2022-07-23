@@ -1,0 +1,17 @@
+before_script:
+  - eval $(ssh-agent -s)
+  - echo "$ssh_key" | tr -d '\r' | ssh-add -
+
+stages:         
+  - deploy
+
+deploy-job:      
+  stage: deploy
+  script:
+    - echo "Обнаружены измененияв репорзитории..."
+    - if [ "$CI_COMMIT_TAG" = "" ] ; then echo "Вносить изменения только с тэгами, отказ";
+    - else echo "Обнаружен тэг, синхронизируем...";
+      ssh -o StrictHostKeyChecking=no serkos@app.kosmovskiy.ru sudo chmod -R 777 /var/www/wordpress/;
+      rsync -vz -e "ssh -o StrictHostKeyChecking=no" ./* serkos@app.kosmovskiy.ru:/var/www/wordpress/;
+      fi
+    - echo "Завершение"

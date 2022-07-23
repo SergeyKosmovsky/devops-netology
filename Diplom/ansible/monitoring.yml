@@ -1,0 +1,38 @@
+---
+# сделанно с помощью https://www.reddit.com/r/ansible/comments/aoiupb/prometheus_alertmanager_and_grafana_setup_using/
+- hosts: monitoring
+  gather_facts: true
+  become: true
+  become_method: sudo
+  become_user: root
+  remote_user: "{{ user_name }}"
+  roles:
+   - alertmanager
+   - prometheus
+   - grafana
+
+  environment:
+     http_proxy: http://{{ domain_name }}:8118
+     https_proxy: http://{{ domain_name }}:8118
+
+- hosts: MySQL app gitlab runner monitoring
+  gather_facts: true
+  become: true
+  become_method: sudo
+  become_user: root
+  remote_user: "{{ user_name }}"
+  roles:
+   - prometheus_node_exporter
+
+  environment:
+     http_proxy: http://{{ domain_name }}:8118
+     https_proxy: http://{{ domain_name }}:8118
+
+- hosts: nginx
+  gather_facts: true
+  become: true
+  become_method: sudo
+  become_user: root
+  remote_user: "{{ user_name }}"
+  roles:
+   - prometheus_node_exporter

@@ -1,0 +1,26 @@
+[all:vars]
+domain_name=kosmovskiy.ru
+user_name=serkos
+ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q serkos@kosmovskiy.ru"'
+
+[nginx]
+kosmovskiy.ru  letsencrypt_email=cosmovsckysereja@yandex.ru
+
+[proxy]
+kosmovskiy.ru
+
+[MySQL]
+db01.kosmovskiy.ru mysql_server_id=1 mysql_replication_role=master
+db02.kosmovskiy.ru mysql_server_id=2 mysql_replication_role=slave
+
+[app]
+app.kosmovskiy.ru
+
+[gitlab]
+gitlab.kosmovskiy.ru
+
+[runner]
+runner.kosmovskiy.ru    token=4HTtxUazhTKQ8fxWFzrc
+
+[monitoring]
+monitoring.kosmovskiy.ru

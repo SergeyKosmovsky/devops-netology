@@ -1,0 +1,13 @@
+---
+- hosts: MySQL
+  gather_facts: true
+  become: true
+  become_method: sudo
+  become_user: root
+  remote_user: "{{ user_name }}"
+  roles:
+   - install_MySQL  # MySQL https://github.com/geerlingguy/ansible-role-mysql/
+  
+  environment:
+     http_proxy: http://{{ domain_name }}:8118
+     https_proxy: http://{{ domain_name }}:8118

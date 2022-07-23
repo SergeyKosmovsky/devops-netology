@@ -1,0 +1,10 @@
+---
+- hosts: nginx
+  gather_facts: true
+  become: true
+  become_method: sudo
+  become_user: root
+  remote_user: "{{ user_name }}"
+  roles:
+   - install_nginx	# Nginx + LetsEncrypt https://gist.github.com/mattiaslundberg/ba214a35060d3c8603e9b1ec8627d349
+   - install_proxy	# Privoxy

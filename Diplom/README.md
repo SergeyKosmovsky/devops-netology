@@ -246,7 +246,7 @@ deploy-job:
 При желании можем добавлять панельки на любой вкус и цвет:
 ![7-add-panel](https://user-images.githubusercontent.com/93204208/180615565-3ee2c783-409c-4ae8-b875-242a4110440b.PNG)
 
-И последнее https://alertmanager.kosmovskiy.ru/ Предоставляю скрин из microsoft edge, почему то хром открывает белый лист
+И последнее https://alertmanager.kosmovskiy.ru/ Предоставляю скрин из microsoft edge, почему то хром открывает белый лист. Для примера отключил несколько серверов
 ![7-alertmanager](https://user-images.githubusercontent.com/93204208/180615929-db0ab3fe-21e1-4ee1-85f6-6bed984d5812.PNG)
 
 

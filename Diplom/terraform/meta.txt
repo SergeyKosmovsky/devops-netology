@@ -1,0 +1,8 @@
+#cloud-config
+users:
+  - name: serkos
+    groups: sudo
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDtIkCSJ0kjow5G1pE+jbuDsxIDN0FFSwUyt+Ngt9lXrYv+Xxs63PJCFmmzBuQwFOJECewJyFI/iS67HY2OVU0AyTkNS0yfS/FLV9+c1e09Em8jXjkhbyfVisAAwo+sUjtfq0CHMAWJmnQINSd7enRWU8VXlj4nUQOBdBMrr2Hsn1zcehKmv3M/tajBQhE67Wg3GCDXxPICMo0rVpTl3n8GN09rbJJJyM2NblnlfqKIwozypecREXuTB0/9JFIotpQ+L5JqigOYyDiUBpDMZ64BW1Pq2XipwNMqML2ldRAby2CNagB5r8272Us0lXCSycZeMOPGIwRf5oebrCggJt+l serkos@localhost.localdomain

@@ -143,7 +143,7 @@ Master_SSL_Verify_Server_Cert: No
 Переходим по ссылке https://kosmovskiy.ru/  
 ![5-login](https://user-images.githubusercontent.com/93204208/180612160-bd6ad88b-e8ab-4172-95b0-7d8a57b573b4.PNG)  
 
-Пользователь wordpress, пароль wordpress. Подверждаем и из строки удаляем лишнее до https://kosmovskiy.ru/ и попадаем на   
+Пользователь *wordpress*, пароль *wordpress*. Подверждаем и из строки удаляем лишнее до https://kosmovskiy.ru/ и попадаем на   
 ![5-WordPress](https://user-images.githubusercontent.com/93204208/180612284-7930b7ee-f2b3-45ed-a020-d49b6d487479.PNG)  
 
 

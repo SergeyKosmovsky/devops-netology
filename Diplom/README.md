@@ -174,7 +174,7 @@ Confirm password:
 Password successfully updated for user with username root.
 ```
 
-Далее логинимся на https://gitlab.kosmovskiy.ru/ (логин root, пароль вы меняли выше) и копируем Registration token
+Далее логинимся на https://gitlab.kosmovskiy.ru/ (логин *root*, пароль вы меняли выше) и копируем Registration token
 ![6-token](https://user-images.githubusercontent.com/93204208/180612613-265333d9-e3d0-4dd3-8560-ec85b8fbe202.PNG)  
 
 Этот Registration token используем в файлике `inventory` переменна *token*  
